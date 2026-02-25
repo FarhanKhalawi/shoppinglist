@@ -1,0 +1,160 @@
+{
+  "identity": {
+    "name": "E1 - The Anti-AI Designer",
+    "tone": "Native, Tactile, Efficient",
+    "core_principles": [
+      "Mobile-First Tactility: Design for thumbs, not cursors.",
+      "RTL-Native: Arabic is not an afterthought; it drives the layout.",
+      "Visual Clarity: High contrast for supermarket aisles (glare-proof)."
+    ]
+  },
+  "typography": {
+    "font_family": {
+      "heading": "Cairo, sans-serif",
+      "body": "Tajawal, sans-serif",
+      "code": "Fira Code, monospace"
+    },
+    "imports": [
+      "@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700&display=swap');"
+    ],
+    "scale": {
+      "h1": "text-4xl md:text-5xl font-bold tracking-tight",
+      "h2": "text-3xl md:text-4xl font-bold tracking-tight",
+      "h3": "text-2xl md:text-3xl font-semibold",
+      "body_lg": "text-lg md:text-xl font-medium",
+      "body": "text-base font-normal leading-relaxed",
+      "caption": "text-sm font-medium text-muted-foreground"
+    },
+    "instructions": "Use Cairo for all headings to give a modern Arabic geometric feel. Use Tajawal for body text as it has excellent legibility at small sizes for list items."
+  },
+  "colors": {
+    "palette_name": "Souq Modern (Emerald & Slate)",
+    "light": {
+      "background": "#F8FAFC", 
+      "foreground": "#0F172A",
+      "card": "#FFFFFF",
+      "card_foreground": "#0F172A",
+      "primary": "#10B981", 
+      "primary_foreground": "#FFFFFF",
+      "secondary": "#F1F5F9",
+      "secondary_foreground": "#0F172A",
+      "muted": "#F1F5F9",
+      "muted_foreground": "#64748B",
+      "accent": "#F0FDFA",
+      "accent_foreground": "#0F766E",
+      "destructive": "#EF4444",
+      "destructive_foreground": "#FFFFFF",
+      "border": "#E2E8F0",
+      "input": "#E2E8F0",
+      "ring": "#10B981"
+    },
+    "dark": {
+      "background": "#020617",
+      "foreground": "#F8FAFC",
+      "card": "#0F172A",
+      "card_foreground": "#F8FAFC",
+      "primary": "#34D399",
+      "primary_foreground": "#020617",
+      "secondary": "#1E293B",
+      "secondary_foreground": "#F8FAFC",
+      "muted": "#1E293B",
+      "muted_foreground": "#94A3B8",
+      "accent": "#115E59",
+      "accent_foreground": "#CCFBF1",
+      "destructive": "#7F1D1D",
+      "destructive_foreground": "#F8FAFC",
+      "border": "#1E293B",
+      "input": "#1E293B",
+      "ring": "#34D399"
+    },
+    "usage": "Primary color (Emerald) is used for checkboxes, FABs, and active states. Backgrounds are tinted Slate (Cool Grey) to feel crisp. Avoid pure black in dark mode."
+  },
+  "layout": {
+    "spacing_scale": "Generous. Use p-4 (16px) as minimum container padding. Use p-6 for cards.",
+    "container": "max-w-md mx-auto md:max-w-3xl",
+    "radius": "rounded-xl (12px) for cards, rounded-full for buttons",
+    "rtl_strategy": "CRITICAL: Use Tailwind Logical Properties. Use 'ms-' (margin-start), 'me-' (margin-end), 'ps-' (padding-start), 'pe-' (padding-end), 'start-' (inset-start), 'end-' (inset-end). DO NOT use left/right unless absolutely necessary for physical direction.",
+    "grid_strategy": "Mobile: Single column (grid-cols-1). Desktop: Masonry or Bento Grid for lists (grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6)."
+  },
+  "components": {
+    "list_item": {
+      "style": "bg-card border border-border/50 shadow-sm hover:shadow-md transition-all rounded-xl p-4 flex items-center gap-4",
+      "interaction": "Swipe-to-action capable (use framer-motion drag). Checkbox on 'start' side.",
+      "typography": "Item name in Tajawal Medium. Quantity in a badge/pill."
+    },
+    "fab": {
+      "style": "fixed bottom-6 end-6 size-14 rounded-full bg-primary text-primary-foreground shadow-lg hover:bg-primary/90 flex items-center justify-center z-50",
+      "icon": "PlusIcon (Lucide)"
+    },
+    "bottom_nav": {
+      "style": "fixed bottom-0 left-0 right-0 bg-background/80 backdrop-blur-lg border-t border-border h-16 flex items-center justify-around z-40 lg:hidden",
+      "items": ["Home", "Search", "Settings"]
+    },
+    "inputs": {
+      "style": "h-12 bg-secondary/50 border-transparent focus:border-primary focus:ring-2 focus:ring-primary/20 rounded-lg text-lg px-4"
+    }
+  },
+  "visual_enhancers": {
+    "glassmorphism": "Use 'backdrop-blur-md bg-background/80' for sticky headers and bottom nav.",
+    "shadows": "Soft, diffuse shadows: 'shadow-[0_8px_30px_rgb(0,0,0,0.04)]'.",
+    "empty_states": "Use minimalist illustrations. Center aligned text with muted foreground."
+  },
+  "assets": {
+    "icons": "Lucide React (already installed)",
+    "images": {
+      "welcome_hero": {
+        "url": "https://images.pexels.com/photos/7608269/pexels-photo-7608269.jpeg",
+        "alt": "Paper bag with treats",
+        "usage": "Onboarding screen hero image"
+      },
+      "empty_list": {
+        "url": "https://images.unsplash.com/photo-1645821522741-2a6b96991657",
+        "alt": "Notepad and pen",
+        "usage": "Empty state for when user has no lists"
+      }
+    }
+  },
+  "animations": {
+    "library": "framer-motion",
+    "presets": {
+      "page_transition": {
+        "initial": { "opacity": 0, "y": 20 },
+        "animate": { "opacity": 1, "y": 0 },
+        "exit": { "opacity": 0, "y": -20 },
+        "transition": { "duration": 0.3 }
+      },
+      "list_item_entry": {
+        "initial": { "opacity": 0, "x": -20 },
+        "animate": { "opacity": 1, "x": 0 },
+        "transition": { "type": "spring", "stiffness": 300, "damping": 30 }
+      },
+      "checkbox_check": {
+        "scale": [1, 0.8, 1.2, 1],
+        "transition": { "duration": 0.2 }
+      }
+    }
+  },
+  "accessibility": {
+    "contrast": "Ensure 4.5:1 for text. Use Slate-900 for text on light backgrounds.",
+    "touch_targets": "Minimum 44x44px for all interactive elements.",
+    "rtl": "Ensure keyboard navigation flows correctly in RTL mode."
+  },
+  "instructions_to_main_agent": [
+    "1. INSTALL FONTS: Add the Google Fonts import to 'src/index.css' immediately.",
+    "2. SETUP RTL: Add 'dir=rtl' to the html tag in 'public/index.html' by default (or handle dynamically).",
+    "3. CONFIGURE TAILWIND: Update 'tailwind.config.js' with the colors and borderRadius defined above.",
+    "4. USE LOGICAL PROPERTIES: When writing Tailwind classes, REPLACE 'ml-4' with 'ms-4', 'pr-4' with 'pe-4', 'left-0' with 'start-0', etc.",
+    "5. CREATE LAYOUT: Build a 'Layout.js' component that handles the bottom nav (mobile) and sidebar (desktop).",
+    "6. USE SHADCN: Customize Shadcn components in 'components/ui' to match the radius and colors.",
+    "7. EMPTY STATES: Use the provided image URLs for empty states.",
+    "8. PWA: Register service worker in 'index.js' (if not already) and ensure 'manifest.json' exists."
+  ],
+  "universal_guidelines": [
+    "Dark colors look good when used independently without gradients.",
+    "Don't make generic centered layouts.",
+    "Create depth through layered design elements.",
+    "Use glass-morphism effects with backdrop filters.",
+    "Every interaction needs micro-animations.",
+    "Use 2-3x more spacing than feels comfortable."
+  ]
+}
