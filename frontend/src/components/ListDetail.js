@@ -94,6 +94,7 @@ export function ListDetail() {
   const [showSearch, setShowSearch] = useState(false);
   const [showEditDialog, setShowEditDialog] = useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+  const [showScanner, setShowScanner] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
 
   // Edit form state
