@@ -42,8 +42,10 @@ import {
   WifiOff,
   Settings,
   Loader2,
-  ClipboardList
+  ClipboardList,
+  AlertTriangle
 } from 'lucide-react';
+import { Alert, AlertDescription } from './ui/alert';
 
 export function Dashboard() {
   const { t, language } = useLanguage();
