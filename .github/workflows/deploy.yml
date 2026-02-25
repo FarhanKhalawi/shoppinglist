@@ -26,13 +26,13 @@ jobs:
         with:
           node-version: "20"
 
-      - name: Install
+      - name: Install dependencies
         working-directory: frontend
-        run: CI=false yarn build 
+        run: yarn install
 
       - name: Build
         working-directory: frontend
-        run: yarn build
+        run: CI=false yarn build
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
