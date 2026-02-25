@@ -56,8 +56,10 @@ import {
   Search,
   Loader2,
   ShoppingBag,
-  Package
+  Package,
+  ScanBarcode
 } from 'lucide-react';
+import { BarcodeScanner } from './BarcodeScanner';
 
 const CATEGORIES = [
   'fruits', 'vegetables', 'meat', 'dairy', 'bakery',
