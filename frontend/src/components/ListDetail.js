@@ -143,6 +143,16 @@ export function ListDetail() {
     }
   };
 
+  const handleBarcodeScan = async (barcode) => {
+    // Add the barcode as item name (user can edit later)
+    try {
+      await addItem({ name: barcode, note: language === 'ar' ? 'تمت إضافته عبر المسح' : 'Added via scan' });
+      toast.success(t('itemAdded'));
+    } catch (error) {
+      toast.error(t('error'));
+    }
+  };
+
   const handleToggleItem = async (itemId) => {
     try {
       await toggleItem(itemId);
