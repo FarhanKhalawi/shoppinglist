@@ -1,0 +1,42 @@
+{
+  "name": "قائمة التسوق",
+  "short_name": "التسوق",
+  "description": "تطبيق قائمة التسوق - نظم مشترياتك بسهولة عبر جميع أجهزتك",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#F8FAFC",
+  "theme_color": "#10B981",
+  "orientation": "portrait-primary",
+  "dir": "rtl",
+  "lang": "ar",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["utilities", "shopping"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "قائمة جديدة",
+      "short_name": "جديدة",
+      "description": "إنشاء قائمة تسوق جديدة",
+      "url": "/?action=new-list",
+      "icons": [{ "src": "logo192.png", "sizes": "192x192" }]
+    }
+  ]
+}
