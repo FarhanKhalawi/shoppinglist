@@ -1,53 +1,127 @@
-import { useEffect } from "react";
-import "@/App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import axios from "axios";
+import React, { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
+import { Toaster } from 'sonner';
+import { LanguageProvider } from './contexts/LanguageContext';
+import { ThemeProvider } from './contexts/ThemeContext';
+import { AuthProvider } from './contexts/AuthContext';
+import { WelcomePage } from './components/WelcomePage';
+import { AuthPage } from './components/AuthPage';
+import { AuthCallback } from './components/AuthCallback';
+import { Dashboard } from './components/Dashboard';
+import { ListDetail } from './components/ListDetail';
+import { Settings } from './components/Settings';
+import { ProtectedRoute } from './components/ProtectedRoute';
+import { initDB } from './lib/db';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
-const API = `${BACKEND_URL}/api`;
+// Initialize IndexedDB on app start
+initDB().catch(console.error);
 
-const Home = () => {
-  const helloWorldApi = async () => {
-    try {
-      const response = await axios.get(`${API}/`);
-      console.log(response.data.message);
-    } catch (e) {
-      console.error(e, `errored out requesting / api`);
-    }
-  };
+// Register service worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then((registration) => {
+        console.log('SW registered:', registration);
+      })
+      .catch((error) => {
+        console.log('SW registration failed:', error);
+      });
+  });
+}
 
-  useEffect(() => {
-    helloWorldApi();
-  }, []);
+// Router component that handles session_id detection
+function AppRouter() {
+  const location = useLocation();
+  
+  // Check URL fragment for session_id synchronously during render
+  // This prevents race conditions with ProtectedRoute's auth check
+  if (location.hash?.includes('session_id=')) {
+    return <AuthCallback />;
+  }
 
   return (
-    <div>
-      <header className="App-header">
-        <a
-          className="App-link"
-          href="https://emergent.sh"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="https://avatars.githubusercontent.com/in/1201222?s=120&u=2686cf91179bbafbc7a71bfbc43004cf9ae1acea&v=4" />
-        </a>
-        <p className="mt-5">Building something incredible ~!</p>
-      </header>
+    <Routes>
+      <Route path="/welcome" element={<WelcomeWithAuth />} />
+      <Route path="/auth" element={<AuthPage />} />
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/list/:listId"
+        element={
+          <ProtectedRoute>
+            <ListDetail />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/settings"
+        element={
+          <ProtectedRoute>
+            <Settings />
+          </ProtectedRoute>
+        }
+      />
+      <Route path="/" element={<Navigate to="/welcome" replace />} />
+      <Route path="*" element={<Navigate to="/welcome" replace />} />
+    </Routes>
+  );
+}
+
+// Welcome page with auth buttons
+function WelcomeWithAuth() {
+  return (
+    <div className="min-h-screen bg-background flex flex-col">
+      <WelcomePage />
+      <AuthButtons />
     </div>
   );
-};
+}
+
+function AuthButtons() {
+  const navigate = (path) => {
+    window.location.href = path;
+  };
+
+  return (
+    <div className="fixed bottom-0 inset-x-0 p-6 glass border-t border-border safe-area-inset-bottom">
+      <div className="max-w-md mx-auto space-y-3">
+        <button
+          onClick={() => navigate('/auth')}
+          className="w-full h-12 rounded-full bg-primary text-primary-foreground font-medium text-lg hover:bg-primary/90 transition-colors touch-feedback"
+          data-testid="get-started-btn"
+        >
+          ابدأ الآن
+        </button>
+      </div>
+    </div>
+  );
+}
 
 function App() {
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Home />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
-      </BrowserRouter>
-    </div>
+    <ThemeProvider>
+      <LanguageProvider>
+        <AuthProvider>
+          <BrowserRouter>
+            <AppRouter />
+            <Toaster 
+              position="top-center" 
+              richColors 
+              dir="rtl"
+              toastOptions={{
+                className: 'font-tajawal'
+              }}
+            />
+          </BrowserRouter>
+        </AuthProvider>
+      </LanguageProvider>
+    </ThemeProvider>
   );
 }
 
