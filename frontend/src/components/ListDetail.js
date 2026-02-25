@@ -430,12 +430,29 @@ export function ListDetail() {
               className="flex-1 h-12 text-lg"
               data-testid="quick-add-input"
             />
+            <Button 
+              type="button" 
+              variant="outline"
+              size="lg" 
+              className="h-12 px-4" 
+              onClick={() => setShowScanner(true)}
+              data-testid="barcode-scan-btn"
+            >
+              <ScanBarcode className="w-5 h-5" />
+            </Button>
             <Button type="submit" size="lg" className="h-12 px-6" data-testid="quick-add-btn">
               <Plus className="w-5 h-5" />
             </Button>
           </div>
         </form>
       </div>
+
+      {/* Barcode Scanner */}
+      <BarcodeScanner
+        open={showScanner}
+        onClose={() => setShowScanner(false)}
+        onScan={handleBarcodeScan}
+      />
 
       {/* Edit Item Dialog */}
       <Dialog open={showEditDialog} onOpenChange={setShowEditDialog}>
