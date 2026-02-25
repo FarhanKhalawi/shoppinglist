@@ -75,29 +75,21 @@ function AppRouter() {
 
 // Welcome page with auth buttons
 function WelcomeWithAuth() {
+  const navigate = useNavigate();
+  
   return (
     <div className="min-h-screen bg-background flex flex-col">
       <WelcomePage />
-      <AuthButtons />
-    </div>
-  );
-}
-
-function AuthButtons() {
-  const navigate = (path) => {
-    window.location.href = path;
-  };
-
-  return (
-    <div className="fixed bottom-0 inset-x-0 p-6 glass border-t border-border safe-area-inset-bottom">
-      <div className="max-w-md mx-auto space-y-3">
-        <button
-          onClick={() => navigate('/auth')}
-          className="w-full h-12 rounded-full bg-primary text-primary-foreground font-medium text-lg hover:bg-primary/90 transition-colors touch-feedback"
-          data-testid="get-started-btn"
-        >
-          ابدأ الآن
-        </button>
+      <div className="fixed bottom-0 inset-x-0 p-6 glass border-t border-border safe-area-inset-bottom">
+        <div className="max-w-md mx-auto space-y-3">
+          <button
+            onClick={() => navigate('/auth')}
+            className="w-full h-12 rounded-full bg-primary text-primary-foreground font-medium text-lg hover:bg-primary/90 transition-colors touch-feedback"
+            data-testid="get-started-btn"
+          >
+            ابدأ الآن
+          </button>
+        </div>
       </div>
     </div>
   );
