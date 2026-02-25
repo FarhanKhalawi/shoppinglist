@@ -178,6 +178,18 @@ export function Dashboard() {
 
       {/* Main Content */}
       <main className="max-w-3xl mx-auto px-4 py-6">
+        {/* Local Mode Warning */}
+        {isLocalMode && (
+          <Alert className="mb-6 border-yellow-500/50 bg-yellow-500/10">
+            <AlertTriangle className="h-4 w-4 text-yellow-600" />
+            <AlertDescription className="text-yellow-700 dark:text-yellow-400">
+              {language === 'ar' 
+                ? 'أنت في الوضع المحلي. البيانات محفوظة على هذا الجهاز فقط ولن تتم مزامنتها. سجّل الدخول لمزامنة بياناتك عبر الأجهزة.'
+                : 'You are in local mode. Data is saved on this device only and will not sync. Sign in to sync your data across devices.'}
+            </AlertDescription>
+          </Alert>
+        )}
+
         {loading ? (
           <div className="flex flex-col items-center justify-center py-20">
             <Loader2 className="w-10 h-10 animate-spin text-primary mb-4" />
