@@ -28,7 +28,7 @@ jobs:
 
       - name: Install
         working-directory: frontend
-        run: yarn install 
+        run: CI=false yarn build 
 
       - name: Build
         working-directory: frontend
